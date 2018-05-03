@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ImageServiceGUI.Model;
+using ImageServiceGUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,14 @@ namespace ImageServiceGUI.controls
     /// </summary>
     public partial class settings : UserControl
     {
+
+        private IVMSettings vmsettings;
+
         public settings()
         {
             InitializeComponent();
+            vmsettings = new VMSettings(new SettingsModel());
+            this.DataContext = this.vmsettings;
         }
 
         private void outputdir_TextChanged(object sender, TextChangedEventArgs e)
