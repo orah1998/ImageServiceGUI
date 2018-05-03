@@ -43,7 +43,7 @@
         <TextBlock Grid.Row="4" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,34,5,-67">Output Directory:</TextBlock>
 
         <Button Margin="0,100,0,-134" Grid.Row="5" Grid.ColumnSpan="2">remove</Button>
-        
+        <ListBox Name="handles" Grid.ColumnSpan="1" Grid.Row="6" ItemsSource="{Binding LbHandlers}" SelectedItem="{Binding SelectedItem}"></ListBox>
 
 
     </Grid>
