@@ -12,6 +12,9 @@
             <TabItem Header="Settings">
                 <controls:settings/>
             </TabItem>
+            <TabItem Header="log">
+                <controls:log/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

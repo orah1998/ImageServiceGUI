@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ImageServiceGUI.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="White">
         <Grid.Resources>
             <Style x:Key="propertieTitle" TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="3"/>
@@ -33,11 +33,18 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Style="{StaticResource propertieTitle}" Margin="144.4,3,159,2.8" Width="235"  >Settings</TextBlock>
-        <TextBlock Grid.Row="1" FontSize="30" Style="{StaticResource propertieTitle}" Margin="3,3.2,2.6,2.6">Output Directory:</TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Style="{StaticResource propertieTitle}" Margin="303,0,0,0" Width="235"  >Settings</TextBlock>
+
+        <TextBlock Grid.Row="1" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,3,5,2">Output Directory:</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource propertieValue}" Text="{Binding VM_OutputDirectory}" Margin="3.4,3.2,3,2.6"/>
+
+        <TextBlock Grid.Row="2" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,0,5,-32">Output Directory:</TextBlock>
+        <TextBlock Grid.Row="3" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,68,5,-101">Output Directory:</TextBlock>
+        <TextBlock Grid.Row="4" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,34,5,-67">Output Directory:</TextBlock>
+
+        <Button Margin="0,100,0,-134" Grid.Row="5" Grid.ColumnSpan="2">remove</Button>
         
-        
-        
+
+
     </Grid>
 </UserControl>
