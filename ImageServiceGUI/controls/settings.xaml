@@ -34,7 +34,6 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Style="{StaticResource propertieTitle}" Margin="303,0,0,0" Width="235"  >Settings</TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding VM_OutputDirectory}"></TextBlock>
         <TextBlock Grid.Row="1" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,3,5,2">Output Directory:</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource propertieValue}" Text="{Binding VM_OutputDirectory}" Margin="3.4,3.2,3,2.6"/>
 
