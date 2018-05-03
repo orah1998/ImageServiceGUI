@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Windows.Input; 
 
 namespace ImageServiceGUI.ViewModel
 {
@@ -14,38 +14,53 @@ namespace ImageServiceGUI.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         ISettingsModel model;
-        public ICommand RemoveCommand { get; private set; }
-
+        private ObservableCollection<string> lbHandlers;
 
         public VMSettings(ISettingsModel model)
         {
             this.model = model;
+            this.model.GetSettingsFromService();
             model.PropertyChanged+= delegate (Object sender, PropertyChangedEventArgs e)
             {
+                Console.WriteLine(e.PropertyName);
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
+            lbHandlers.Add("yair");
+            lbHandlers.Add("or");
         }
 
-        private void NotifyPropertyChanged(string property)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-            var command = this.RemoveCommand as DelegateCommand<object>;
-            command.RaiseCanExecuteChange();
-        }
 
         public string VM_OutputDirectory
         {
-            get { return this.model.OutputDirectory; }
+            get { return this.model.outputDir; }
         }
 
-        public string VM_SourceName => throw new NotImplementedException();
+        public string VM_SourceName
+        {
+            get {return this.model.Source; }
+        }
 
-        public string VM_LogName => throw new NotImplementedException();
+        public string VM_LogName
+        {
+            get { return this.model.Log; }
+        }
 
-        public int VM_ThumbnailSize => throw new NotImplementedException();
+        public int VM_ThumbnailSize
+        {
+            get { return this.model.ThumbSize; }
+        }
 
-        public ObservableCollection<string> LbHandlers => throw new NotImplementedException();
+        public ObservableCollection<string> LbHandlers
+        {
+            get { return this.lbHandlers; }
+        }
 
-        
+
+       public void NotifyPropertyChanged(string property)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+
     }
 }
