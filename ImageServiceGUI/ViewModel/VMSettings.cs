@@ -55,6 +55,14 @@ namespace ImageServiceGUI.ViewModel
             get { return this.lbHandlers; }
         }
 
+        public string SelectedItem
+        {
+            set {
+                this.SelectedItem = value;
+                    this.NotifyPropertyChanged("SelectedItem"); }
+            get { return this.SelectedItem; }
+        }
+
 
        public void NotifyPropertyChanged(string property)
         {
