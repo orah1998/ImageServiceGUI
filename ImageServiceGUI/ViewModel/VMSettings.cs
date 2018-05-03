@@ -14,19 +14,19 @@ namespace ImageServiceGUI.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         ISettingsModel model;
-        private ObservableCollection<string> lbHandlers;
+        private ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
 
         public VMSettings(ISettingsModel model)
         {
             this.model = model;
-            this.model.GetSettingsFromService();
+         //   this.model.GetSettingsFromService();
             model.PropertyChanged+= delegate (Object sender, PropertyChangedEventArgs e)
             {
                 Console.WriteLine(e.PropertyName);
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
-            lbHandlers.Add("yair");
-            lbHandlers.Add("or");
+            this.lbHandlers.Add("yair");
+            this.lbHandlers.Add("or");
         }
 
 
