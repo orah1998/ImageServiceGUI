@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -19,10 +20,14 @@ namespace ImageServiceGUI.Model
         private string source;
         private string log;
         private int thumbSize;
+        private List<string> listOfDir;
         public event PropertyChangedEventHandler PropertyChanged;
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+        TcpClient client = new TcpClient();
 
 
-        public string outputDir {
+        public string outputDir
+        {
             set
             {
                 this.outputDir = value;
@@ -67,8 +72,6 @@ namespace ImageServiceGUI.Model
 
         public void GetSettingsFromService()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
-            TcpClient client = new TcpClient();
             client.Connect(ep);
             Console.WriteLine("You are connected");
             using (NetworkStream stream = client.GetStream())
@@ -95,10 +98,27 @@ namespace ImageServiceGUI.Model
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop));
+            JObject jobj = new JObject();
+            jobj["dir"] = prop;
+
+
+
+            client.Connect(ep);
+            Console.WriteLine("You are connected");
+            using (NetworkStream stream = client.GetStream())
+            using (BinaryReader reader = new BinaryReader(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                // Send data to server
+                Console.Write(jobj.ToString());
+
+
+
+            }
+
+
+
+
         }
-
-
-
-
     }
 }
