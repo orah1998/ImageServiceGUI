@@ -69,6 +69,16 @@ namespace ImageServiceGUI.ViewModel
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
+        public string Remove
+        {
+            set
+            {
 
+            }
+            get
+            {
+
+            }
+        }
     }
 }
