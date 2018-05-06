@@ -46,5 +46,15 @@ namespace ImageServiceGUI.controls
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void lbHandlers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            removeButton.IsEnabled = true;
+        }
     }
 }

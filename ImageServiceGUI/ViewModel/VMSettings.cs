@@ -30,7 +30,7 @@ namespace ImageServiceGUI.ViewModel
             this.lbHandlers.Add("yair");
             this.lbHandlers.Add("or");
 
-            this.Remove = new RemoveCommand<object>(this.ExecuteRemove,this.CanExecuteRemove);
+            //this.Remove = new RemoveCommand<object>(this.ExecuteRemove,this.CanExecuteRemove);
         }
 
 
@@ -78,15 +78,15 @@ namespace ImageServiceGUI.ViewModel
 
         private void ExecuteRemove(object parameter)
         {
-            this.lbHandlers.Remove(this.SelectedItem);
+            //this.lbHandlers.Remove(this.SelectedItem);
         }
         private bool CanExecuteRemove(object parameter)
         {
-            if (this.SelectedItem != null)
+            //if (this.SelectedItem != null)
             {
                 return true;
             }
-            return false;
+            //return false;
         }
     }
 }
