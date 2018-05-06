@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input; 
+using System.Windows.Input;
 
 namespace ImageServiceGUI.ViewModel
 {
@@ -16,17 +16,21 @@ namespace ImageServiceGUI.ViewModel
         ISettingsModel model;
         private ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
 
+        public ICommand Remove { get; private set; }
+
         public VMSettings(ISettingsModel model)
         {
             this.model = model;
-         //   this.model.GetSettingsFromService();
-            model.PropertyChanged+= delegate (Object sender, PropertyChangedEventArgs e)
-            {
-                Console.WriteLine(e.PropertyName);
-                NotifyPropertyChanged("VM_" + e.PropertyName);
-            };
+            //   this.model.GetSettingsFromService();
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+             {
+                 Console.WriteLine(e.PropertyName);
+                 NotifyPropertyChanged("VM_" + e.PropertyName);
+             };
             this.lbHandlers.Add("yair");
             this.lbHandlers.Add("or");
+
+            this.Remove = new RemoveCommand<object>(this.ExecuteRemove,this.CanExecuteRemove);
         }
 
 
@@ -37,7 +41,7 @@ namespace ImageServiceGUI.ViewModel
 
         public string VM_SourceName
         {
-            get {return this.model.Source; }
+            get { return this.model.Source; }
         }
 
         public string VM_LogName
@@ -57,28 +61,32 @@ namespace ImageServiceGUI.ViewModel
 
         public string SelectedItem
         {
-            set {
+            set
+            {
                 this.SelectedItem = value;
-                    this.NotifyPropertyChanged("SelectedItem"); }
+                this.NotifyPropertyChanged("SelectedItem");
+            }
             get { return this.SelectedItem; }
+
         }
 
 
-       public void NotifyPropertyChanged(string property)
+        public void NotifyPropertyChanged(string property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
-        public string Remove
+        private void ExecuteRemove(object parameter)
         {
-            set
+            this.lbHandlers.Remove(this.SelectedItem);
+        }
+        private bool CanExecuteRemove(object parameter)
+        {
+            if (this.SelectedItem != null)
             {
-
+                return true;
             }
-            get
-            {
-
-            }
+            return false;
         }
     }
 }

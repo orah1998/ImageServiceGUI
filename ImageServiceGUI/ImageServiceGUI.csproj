@@ -60,6 +60,7 @@
     <Compile Include="Model\ISettingsModel.cs" />
     <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="ViewModel\IVMSettings.cs" />
+    <Compile Include="ViewModel\RemoveCommand.cs" />
     <Compile Include="ViewModel\VMSettings.cs" />
     <Page Include="controls\log.xaml">
       <SubType>Designer</SubType>
