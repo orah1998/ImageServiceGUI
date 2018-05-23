@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
-
+    /// <summary>
+    /// hello my friends
+    /// </summary>
 
 
     class SettingsModel : ISettingsModel
@@ -22,7 +24,7 @@ namespace ImageServiceGUI.Model
         private int thumbSize;
         private List<string> listOfDir;
         public event PropertyChangedEventHandler PropertyChanged;
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8200);
         TcpClient client = new TcpClient();
 
 
@@ -79,10 +81,8 @@ namespace ImageServiceGUI.Model
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
                 // Send data to server
-                Console.Write("AppConfig");
+                writer.Write("AppConfig");
                 int num = int.Parse(Console.ReadLine());
-                writer.Write(num);
-
 
 
                 // Get result from server
@@ -91,7 +91,8 @@ namespace ImageServiceGUI.Model
                 this.log = reader.ReadString();
                 this.outputDirectory = reader.ReadString();
             }
-            client.Close();
+            client.Close();
+
         }
 
 
@@ -100,7 +101,7 @@ namespace ImageServiceGUI.Model
             this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop));
             JObject jobj = new JObject();
             jobj["dir"] = prop;
-
+             
 
 
             client.Connect(ep);

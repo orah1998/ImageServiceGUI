@@ -21,6 +21,7 @@ namespace ImageServiceGUI.ViewModel
         public VMSettings(ISettingsModel model)
         {
             this.model = model;
+            this.model.GetSettingsFromService();
             //   this.model.GetSettingsFromService();
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
              {
