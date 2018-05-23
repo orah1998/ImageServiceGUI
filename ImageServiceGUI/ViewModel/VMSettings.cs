@@ -18,9 +18,9 @@ namespace ImageServiceGUI.ViewModel
 
         public ICommand Remove { get; private set; }
 
-        public VMSettings(ISettingsModel model)
+        public VMSettings()
         {
-            this.model = model;
+            model = new SettingsModel();
             this.model.GetSettingsFromService();
             //   this.model.GetSettingsFromService();
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
@@ -57,7 +57,7 @@ namespace ImageServiceGUI.ViewModel
 
         public ObservableCollection<string> LbHandlers
         {
-            get { return this.lbHandlers; }
+            get { return this.model.LbHandlers; }
         }
 
         public string SelectedItem
