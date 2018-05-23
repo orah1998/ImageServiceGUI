@@ -11,11 +11,13 @@ namespace ImageServiceGUI.Model
     interface ISettingsModel : INotifyPropertyChanged
     {
 
-        string outputDir { set; get; }
+        string OutputDir { set; get; }
         string Source { set; get; }
         string Log { set; get; }
         int ThumbSize { set; get; }
         void GetSettingsFromService();
         ObservableCollection<string> LbHandlers { get; }
+
+        void RemoveHandler(string selectedItem);
     }
 }

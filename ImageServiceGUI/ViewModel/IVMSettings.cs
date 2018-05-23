@@ -14,6 +14,7 @@ namespace ImageServiceGUI.ViewModel
         string VM_SourceName { get; }
         string VM_LogName { get; }
         int VM_ThumbnailSize { get; }
-        ObservableCollection<string> LbHandlers { get; }
+        string SelectedItem { get; set; }
+        ObservableCollection<string> VM_LbHandlers { get; }
     }
 }

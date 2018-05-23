@@ -3,13 +3,13 @@ using System.Windows.Input;
 
 public class RemoveCommand<T> : ICommand
 {
-    public delegate void ExcuteMethod<T>(object obj);
+    public delegate void ExecuteMethod<T>(object obj);
     public delegate bool CanExecuteMethod<T>(object obj);
 
-    private ExcuteMethod<T> executeRemove;
+    private ExecuteMethod<T> executeRemove;
     private CanExecuteMethod<T> canExecuteRemove;
 
-    public RemoveCommand(ExcuteMethod<T> executeRemove, CanExecuteMethod<T> canExecuteRemove)
+    public RemoveCommand(ExecuteMethod<T> executeRemove, CanExecuteMethod<T> canExecuteRemove)
     {
         this.executeRemove = executeRemove;
         this.canExecuteRemove = canExecuteRemove;
