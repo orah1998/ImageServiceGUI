@@ -51,10 +51,7 @@ namespace ImageServiceGUI.Model
 
         public void RemoveHandler(string name)
         {
-            
-            {
-                writer.Write(name);
-            }
+             writer.Write(name);   
         }
 
 
@@ -144,7 +141,28 @@ namespace ImageServiceGUI.Model
             
         }
 
+        public void listenFolders()
+        {
+            new Task(() =>
+            {
+                try { 
+                string fold = reader.ReadString();
+                JObject obj = JsonConvert.DeserializeObject<JObject>(fold);
+                if (obj["inst"].ToString()=="3") {
+                    try { 
+                this.lbHandlers.Remove(obj["remove"].ToString());
+                    }catch(Exception e)
+                    {
+                        //if the folder was already deleted from THIS GUI
+                    }
+                }
+                }catch(Exception ex)
+                {
 
+                }
+            }).Start();
+
+        }
 
 
         public void NotifyPropertyChanged(string prop)

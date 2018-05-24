@@ -23,8 +23,8 @@ namespace ImageServiceGUI.controls
     {
         public log()
         {
-            InitializeComponent();
-            this.DataContext = new VMlog();
+         //   InitializeComponent();
+         //   this.DataContext = new VMlog();
 
         }
     }

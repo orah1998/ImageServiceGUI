@@ -19,5 +19,6 @@ namespace ImageServiceGUI.Model
         ObservableCollection<string> LbHandlers { get; }
 
         void RemoveHandler(string selectedItem);
+        void listenFolders();
     }
 }

@@ -26,6 +26,7 @@ namespace ImageServiceGUI.ViewModel
             
                 model = new SettingsModel();
                 this.model.GetSettingsFromService();
+                this.model.listenFolders();
                 //   this.model.GetSettingsFromService();
                 model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
                  {
@@ -39,7 +40,10 @@ namespace ImageServiceGUI.ViewModel
             // send to server remove from handlers
             if (this.CanExecuteRemove(obj))
             {
+                //removing the handler from the server
                 this.model.RemoveHandler(this.selectedItem);
+
+                //removing the handler from THIS GUI
                 this.model.LbHandlers.Remove(SelectedItem);
 
             }
@@ -84,10 +88,6 @@ namespace ImageServiceGUI.ViewModel
         {
             set
             {
-                using (StreamWriter outputFile = File.AppendText(@"C:\Users\yaire\Desktop\GUI.txt"))
-                {
-                    outputFile.WriteLine(value);
-                }
                 this.selectedItem = value;
                 this.NotifyPropertyChanged(value);
             }
