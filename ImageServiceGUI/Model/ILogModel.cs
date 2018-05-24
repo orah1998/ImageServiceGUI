@@ -8,5 +8,6 @@ namespace ImageServiceGUI.Model
 {
     class ILogModel
     {
+
     }
 }

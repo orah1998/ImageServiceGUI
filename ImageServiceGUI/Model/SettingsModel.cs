@@ -120,7 +120,7 @@ namespace ImageServiceGUI.Model
             // Send data to server
             //sending app config.....
             JObject obj2 = new JObject();
-            obj2["inst"] = "2";
+            obj2["inst"] = "1";
             writer.Write(JsonConvert.SerializeObject(obj2));
 
                     // Get result from server
