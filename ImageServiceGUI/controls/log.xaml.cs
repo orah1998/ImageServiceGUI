@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageServiceGUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace ImageServiceGUI.controls
         public log()
         {
             InitializeComponent();
-            this.DataContext = new VMLogPage();
+            this.DataContext = new VMlog();
 
         }
     }
