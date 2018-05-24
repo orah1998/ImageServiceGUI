@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +19,19 @@ namespace ImageServiceGUI.Model
         private string messageType;
         BinaryReader reader;
         BinaryWriter writer;
+        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+        static TcpClient client = new TcpClient();
+        static NetworkStream stream;
 
+        public LogModel()
+        {
+            client.Connect(ep);
+            stream = client.GetStream();
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
+            this.logsList.Add(new LogData(ENUMS.MessageTypeEnum.INFO, "lets try"));
 
+        }
         public ObservableCollection<LogData> LogsList
         {
             get { return this.logsList; }

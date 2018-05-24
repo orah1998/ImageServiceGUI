@@ -24,6 +24,21 @@ namespace ImageServiceGUI.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private ObservableCollection<LogData> VM_logsList = new ObservableCollection<LogData>();
+
+
+        public VMlog()
+        {
+            model = new LogModel();
+        }
+
+        string LogType
+        {
+            get {
+            return this.model.
+            }
+            set; }
+
         public ObservableCollection<LogData> VM_LogsList
         {
             get { return this.model.LogsList; }
