@@ -56,5 +56,11 @@ namespace ImageServiceGUI.controls
         {
             removeButton.IsEnabled = true;
         }
+
+        private void OnSelected(object sender, RoutedEventArgs e)
+        {
+            removeButton.IsEnabled = true;
+
+        }
     }
 }
