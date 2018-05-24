@@ -26,7 +26,10 @@ public class RemoveCommand<T> : ICommand
         return this.canExecuteRemove(parameter);
 
     }
-
+    public void RaiseCanExecuteChange()
+    {
+        this.CanExecuteChanged?.Invoke(this, new EventArgs());
+    }
 
     public event EventHandler CanExecuteChanged;
 }
