@@ -117,9 +117,11 @@ namespace ImageServiceGUI.Model
         public void GetSettingsFromService()
         {
                 string toBreak = "";
-                    // Send data to server
-                    //sending app config.....
-
+            // Send data to server
+            //sending app config.....
+            JObject obj2 = new JObject();
+            obj2["inst"] = "AppConfig";
+            writer.Write(JsonConvert.SerializeObject(obj2));
 
                     // Get result from server
                     string ans = reader.ReadString();
