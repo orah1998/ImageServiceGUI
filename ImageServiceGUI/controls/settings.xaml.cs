@@ -49,7 +49,10 @@ namespace ImageServiceGUI.controls
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.vmsettings.update(vmsettings.SelectedItem);
             
+            removeButton.IsEnabled = false;
+
         }
 
         private void lbHandlers_SelectionChanged(object sender, SelectionChangedEventArgs e)

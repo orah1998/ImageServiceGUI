@@ -16,5 +16,6 @@ namespace ImageServiceGUI.ViewModel
         int VM_ThumbnailSize { get; }
         string SelectedItem { get; set; }
         ObservableCollection<string> VM_LbHandlers { get; }
+        void update(object obj);
     }
 }

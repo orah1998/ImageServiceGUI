@@ -19,7 +19,7 @@ namespace ImageServiceGUI.ViewModel
         private string selectedItem;
 
         //we will use remove as a delegate to remove handlers!
-        public bool Remove { get; private set; }
+        public ICommand Remove { get; private set; }
 
         public VMSettings()
         {
@@ -32,13 +32,19 @@ namespace ImageServiceGUI.ViewModel
                      Console.WriteLine(e.PropertyName);
                      NotifyPropertyChanged("VM_" + e.PropertyName);
                  };
-            
         }
 
-        public void ExecuteRemove(object obj)
+        public void update(object obj)
         {
             // send to server remove from handlers
-            this.model.RemoveHandler(this.selectedItem);
+            if (this.CanExecuteRemove(obj))
+            {
+                this.model.RemoveHandler(this.selectedItem);
+                this.model.LbHandlers.Remove(SelectedItem);
+
+            }
+
+
         }
 
 
@@ -78,7 +84,7 @@ namespace ImageServiceGUI.ViewModel
         {
             set
             {
-                using (StreamWriter outputFile = File.AppendText(@"C:\Users\Operu\Desktop\testGui\GUI.txt"))
+                using (StreamWriter outputFile = File.AppendText(@"C:\Users\yaire\Desktop\GUI.txt"))
                 {
                     outputFile.WriteLine(value);
                 }
@@ -95,11 +101,12 @@ namespace ImageServiceGUI.ViewModel
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
             //making the button pressable
-            Remove = true;
-            
+            //var command = this.Remove as RemoveCommand<object>;
+//            command.RaiseCanExecuteChange();
+
         }
 
-        
+
         private bool CanExecuteRemove(object parameter)
         {
             if (this.SelectedItem != null)
