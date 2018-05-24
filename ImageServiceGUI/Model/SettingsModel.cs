@@ -166,9 +166,6 @@ namespace ImageServiceGUI.Model
 
             }
         }
-        public bool RemoveHandler(string handler)
-        {
-
-        }
+       
     }
 }

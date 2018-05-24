@@ -57,10 +57,11 @@ namespace ImageServiceGUI.controls
             removeButton.IsEnabled = true;
         }
 
-        private void OnSelected(object sender, RoutedEventArgs e)
+       
+
+        private void lbHandlers_Selected(object sender, RoutedEventArgs e)
         {
             removeButton.IsEnabled = true;
-
         }
     }
 }

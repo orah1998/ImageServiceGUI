@@ -49,7 +49,7 @@
         <TextBlock Grid.Row="4" Grid.Column="1" FontSize="25" Text="{Binding VM_ThumbnailSize}"  Margin="3"/>
 
         <Button Name="removeButton" Margin="0,44,0,154" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2"  Command="{Binding Remove}" Click="Button_Click" IsEnabled="False">remove</Button>
-        <ListBox Name="lbHandlers" Grid.ColumnSpan="2" Grid.Row="5" ItemsSource="{Binding VM_LbHandlers}" SelectedItem="{Binding selectedItem}" Selected="OnSelected" Margin="0,54,0,0" ></ListBox>
+        <ListBox Name="lbHandlers" Grid.ColumnSpan="2" Grid.Row="5" ItemsSource="{Binding VM_LbHandlers}" SelectedItem="{Binding selectedItem}"  Margin="0,54,0,0" ></ListBox>
 
     </Grid>
 </UserControl>
