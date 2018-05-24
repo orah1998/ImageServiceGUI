@@ -57,10 +57,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ENUMS\MessageTypeEnum.cs" />
+    <Compile Include="LogData.cs" />
+    <Compile Include="Model\ILogModel.cs" />
     <Compile Include="Model\ISettingsModel.cs" />
+    <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\SettingsModel.cs" />
+    <Compile Include="ViewModel\IVMlog.cs" />
     <Compile Include="ViewModel\IVMSettings.cs" />
     <Compile Include="ViewModel\RemoveCommand.cs" />
+    <Compile Include="ViewModel\VMlog.cs" />
     <Compile Include="ViewModel\VMSettings.cs" />
     <Page Include="controls\log.xaml">
       <SubType>Designer</SubType>
