@@ -28,7 +28,7 @@ namespace ImageServiceGUI.controls
         public settings()
         {
             InitializeComponent();
-            vmsettings = new VMSettings(new SettingsModel());
+            vmsettings = new VMSettings();
             this.DataContext = this.vmsettings;
         }
 
