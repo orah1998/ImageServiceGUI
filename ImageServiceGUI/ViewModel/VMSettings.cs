@@ -87,7 +87,7 @@ namespace ImageServiceGUI.ViewModel
             }
             get { return this.selectedItem; }
         }
-
+         
 
         
 
