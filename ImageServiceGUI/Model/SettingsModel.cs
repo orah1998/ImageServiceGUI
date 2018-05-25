@@ -49,17 +49,21 @@ namespace ImageServiceGUI.Model
 
         public void RemoveHandler(string name)
         {
-            TcpClient client2 = new TcpClient();
-            client2.Connect(ep);
-            stream = client2.GetStream();
+            mutex.WaitOne();
+            SingletonClient.Instance.Connect();
+            stream=SingletonClient.Instance.getClient().GetStream();
+
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
+
             JObject obj = new JObject();
             obj["inst"] = "3";
             obj["etc"] = name;
 
             writer.Write(JsonConvert.SerializeObject(obj));
-            client2.Close();
+
+            SingletonClient.Instance.Closing();
+            mutex.ReleaseMutex();
         }
 
 
@@ -123,8 +127,10 @@ namespace ImageServiceGUI.Model
         public void GetSettingsFromService()
         {
             ObservableCollection<string> temp = new ObservableCollection<string>();
-            client.Connect(ep);
-            stream = client.GetStream();
+            mutex.WaitOne();
+            SingletonClient.Instance.Connect();
+            stream = SingletonClient.Instance.getClient().GetStream();
+
             reader = new BinaryReader(stream);
             writer = new BinaryWriter(stream);
 
@@ -150,8 +156,8 @@ namespace ImageServiceGUI.Model
                     temp.Add(item);
                 }
             this.lbHandlers = temp;
-            client.Close();
-
+            SingletonClient.Instance.Closing();
+            mutex.ReleaseMutex();
 
         }
 
@@ -163,12 +169,17 @@ namespace ImageServiceGUI.Model
                 while (true)
                 {
                     System.Threading.Thread.Sleep(2000);
+                    using (StreamWriter sw = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
+                    {
+                        sw.WriteLine("entered settings");
+                    }
                     temp = new ObservableCollection<string>();
                     try
                     {
-                        TcpClient client2 = new TcpClient();
-                        client2.Connect(ep);   
-                        stream = client2.GetStream();
+                        mutex.WaitOne();
+                        SingletonClient.Instance.Connect();
+                        stream = SingletonClient.Instance.getClient().GetStream();
+
                         reader = new BinaryReader(stream);
                         writer = new BinaryWriter(stream);
                         JObject obj2 = new JObject();
@@ -184,7 +195,10 @@ namespace ImageServiceGUI.Model
                         }
                         this.lbHandlers = temp;
                         this.PropertyChanged?.Invoke(this,new PropertyChangedEventArgs("LbHandlers"));
-                        client2.Close();
+                        SingletonClient.Instance.Closing();
+                        mutex.ReleaseMutex();
+
+
                     }
                     
                     catch (Exception ex)

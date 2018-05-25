@@ -34,7 +34,9 @@ namespace ImageServiceGUI.ViewModel
               {
                   NotifyPropertyChanged("VM_" + e.PropertyName);
               };
-            this.getLog();
+            this.model.GetLogHistoryFromService();
+            //this.model.GetLogFromService();
+
         }
 
         
@@ -44,24 +46,7 @@ namespace ImageServiceGUI.ViewModel
             get { return this.model.LogsList; }
         }
 
-
-
-
-
-
-
-        public void getLog()
-        {
-            if (flag == 1)
-            {
-                this.model.GetLogHistoryFromService();
-                flag = 0;
-            }
-            else
-            {
-                this.model.GetLogFromService();
-            }
-        }
+        
 
 
 

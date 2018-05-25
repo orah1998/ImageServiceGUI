@@ -6,43 +6,24 @@
              xmlns:local="clr-namespace:ImageServiceGUI.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Margin="0,0,0,0">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Margin="0,0,0,0" Width="235"  >Logs</TextBlock>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0.6,0,-368" ItemsSource="{Binding VM_LogsList}" Height="369" VerticalAlignment="Top" >
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <DataGrid.Columns>
+        <Label Grid.Row="0">In Logs Page</Label>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding VM_LogsList}" AutoGenerateColumns="False" CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="Auto" Height="Auto" Margin="0,0,0,10">
 
-                <DataGridTextColumn Header="Type" Width="50" IsReadOnly="True"   Binding="{Binding LogType}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" IsReadOnly="True" Width="Auto"  Binding="{Binding LogType}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="{Binding LogType}"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Message" Width="*" Binding="{Binding LogMessage}"/>
+                <DataGridTextColumn Header="Message" IsReadOnly="True" Width="*" Binding="{Binding LogMessage}"/>
             </DataGrid.Columns>
         </DataGrid>
-
     </Grid>
 </UserControl>

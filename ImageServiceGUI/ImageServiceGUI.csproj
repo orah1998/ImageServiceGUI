@@ -63,6 +63,7 @@
     <Compile Include="Model\ISettingsModel.cs" />
     <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\SettingsModel.cs" />
+    <Compile Include="Model\SingletonClient.cs" />
     <Compile Include="ViewModel\IVMlog.cs" />
     <Compile Include="ViewModel\IVMSettings.cs" />
     <Compile Include="ViewModel\RemoveCommand.cs" />
