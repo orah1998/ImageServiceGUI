@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -22,13 +23,14 @@ namespace ImageServiceGUI.Model
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
         static TcpClient client = new TcpClient();
         static NetworkStream stream;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public LogModel()
         {
-            client.Connect(ep);
-            stream = client.GetStream();
-            reader = new BinaryReader(stream);
-            writer = new BinaryWriter(stream);
+          //  client.Connect(ep);
+          //  stream = client.GetStream();
+          //  reader = new BinaryReader(stream);
+          //  writer = new BinaryWriter(stream);
             this.logsList.Add(new LogData(ENUMS.MessageTypeEnum.INFO, "lets try"));
 
         }
@@ -67,5 +69,14 @@ namespace ImageServiceGUI.Model
                 this.LogsList.Add(log);
             }
         }
+
+
+
+        public void NotifyPropertyChanged(string prop)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+
     }
 }

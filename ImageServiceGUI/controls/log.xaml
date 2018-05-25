@@ -17,10 +17,23 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Margin="0,0,0,0" Width="235"  >Logs</TextBlock>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,-367" Grid.RowSpan="2" ItemsSource="{Binding LogsList}" Height="369" VerticalAlignment="Top" >
-            <DataGrid.Columns>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0.6,0,-368" ItemsSource="{Binding VM_LogsList}" Height="369" VerticalAlignment="Top" >
             
-                <DataGridTextColumn Header="Type" Width="50"  Binding="{Binding LogType}">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Type" Width="50" IsReadOnly="True"   Binding="{Binding LogType}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="{Binding LogType}"/>

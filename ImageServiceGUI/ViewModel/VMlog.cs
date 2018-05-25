@@ -30,19 +30,25 @@ namespace ImageServiceGUI.ViewModel
         public VMlog()
         {
             model = new LogModel();
+            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+              {
+                  NotifyPropertyChanged("VM_" + e.PropertyName);
+              };
+           // model.GetLogHistoryFromService();
         }
 
-        string LogType
-        {
-            get {
-            return this.model.
-            }
-            set; }
+        
 
         public ObservableCollection<LogData> VM_LogsList
         {
             get { return this.model.LogsList; }
         }
+
+
+
+
+
+
 
         public void getLog()
         {
@@ -56,5 +62,17 @@ namespace ImageServiceGUI.ViewModel
                 this.model.GetLogFromService();
             }
         }
+
+
+
+
+
+        public void NotifyPropertyChanged(string prop)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+
+
     }
 }

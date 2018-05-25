@@ -27,7 +27,6 @@ namespace ImageServiceGUI.ViewModel
                 model = new SettingsModel();
                 this.model.GetSettingsFromService();
                 this.model.listenFolders();
-                //   this.model.GetSettingsFromService();
                 model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
                  {
                      Console.WriteLine(e.PropertyName);
@@ -50,11 +49,6 @@ namespace ImageServiceGUI.ViewModel
 
 
         }
-
-
-        
-
-
 
 
         public string VM_OutputDirectory

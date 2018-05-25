@@ -29,7 +29,6 @@ namespace ImageServiceGUI.Model
         private string log;
         private int thumbSize;
         private ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
-        private List<string> listOfDir;
         public event PropertyChangedEventHandler PropertyChanged;
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
         static TcpClient client = new TcpClient();
@@ -41,17 +40,22 @@ namespace ImageServiceGUI.Model
 
         public SettingsModel()
         {
-            client.Connect(ep);
-            stream = client.GetStream();
-            reader = new BinaryReader(stream);
-            writer = new BinaryWriter(stream);
-
         }
 
 
         public void RemoveHandler(string name)
         {
-             writer.Write(name);   
+            TcpClient client2 = new TcpClient();
+            client2.Connect(ep);
+            stream = client2.GetStream();
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
+            JObject obj = new JObject();
+            obj["inst"] = "3";
+            obj["etc"] = name;
+
+            writer.Write(JsonConvert.SerializeObject(obj));
+            client.Close();
         }
 
 
@@ -113,11 +117,20 @@ namespace ImageServiceGUI.Model
 
         public void GetSettingsFromService()
         {
-                string toBreak = "";
+
+
+            ObservableCollection<string> temp = new ObservableCollection<string>();
+            client.Connect(ep);
+            stream = client.GetStream();
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
+
+            string toBreak = "";
             // Send data to server
             //sending app config.....
             JObject obj2 = new JObject();
             obj2["inst"] = "1";
+            obj2["etc"] = "1";
             writer.Write(JsonConvert.SerializeObject(obj2));
 
                     // Get result from server
@@ -130,35 +143,33 @@ namespace ImageServiceGUI.Model
                     toBreak = obj["Handler"].ToString();
 
 
-
                 foreach (string item in toBreak.Split(';'))
                 {
-                    this.lbHandlers.Add(item);
+                    temp.Add(item);
                 }
+            this.lbHandlers = temp;
+
+            client.Close();
 
 
-
-            
         }
 
         public void listenFolders()
         {
             new Task(() =>
             {
-                try { 
-                string fold = reader.ReadString();
-                JObject obj = JsonConvert.DeserializeObject<JObject>(fold);
-                if (obj["inst"].ToString()=="3") {
-                    try { 
-                this.lbHandlers.Remove(obj["remove"].ToString());
-                    }catch(Exception e)
-                    {
-                        //if the folder was already deleted from THIS GUI
-                    }
-                }
-                }catch(Exception ex)
+                System.Threading.Thread.Sleep(500);
+                while (true)
                 {
+                    try
+                    {
+                        GetSettingsFromService();
+                    }
+                    
+                    catch (Exception ex)
+                    {
 
+                    }
                 }
             }).Start();
 
@@ -168,23 +179,6 @@ namespace ImageServiceGUI.Model
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop));
-            JObject jobj = new JObject();
-            jobj["dir"] = prop;
-             
-
-
-            client.Connect(ep);
-            Console.WriteLine("You are connected");
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                // Send data to server
-                Console.Write(jobj.ToString());
-
-
-
-            }
         }
        
     }
