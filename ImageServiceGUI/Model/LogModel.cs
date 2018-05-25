@@ -139,6 +139,7 @@ namespace ImageServiceGUI.Model
                         string ret = reader.ReadString();
                         JObject objRet = JsonConvert.DeserializeObject<JObject>(ret);
                         string toBreak = objRet["2"].ToString();
+
                         foreach (string item in toBreak.Split('|'))
                         {
                             ENUMS.MessageTypeEnum typ;

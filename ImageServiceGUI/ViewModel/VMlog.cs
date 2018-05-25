@@ -35,7 +35,7 @@ namespace ImageServiceGUI.ViewModel
                   NotifyPropertyChanged("VM_" + e.PropertyName);
               };
             this.model.GetLogHistoryFromService();
-            //this.model.GetLogFromService();
+            this.model.GetLogFromService();
 
         }
 
