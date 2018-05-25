@@ -49,7 +49,7 @@ namespace ImageServiceGUI.Model
             JObject obj = new JObject();
             obj["inst"] = "4";
             string command = JsonConvert.SerializeObject(obj);
-            writer.Write(JsonConvert.SerializeObject(obj));
+            writer.Write(command);
 
             // getting old log
             string ans = reader.ReadString();
