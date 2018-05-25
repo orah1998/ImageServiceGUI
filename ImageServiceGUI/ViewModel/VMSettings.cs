@@ -30,7 +30,7 @@ namespace ImageServiceGUI.ViewModel
                  {
                      NotifyPropertyChanged("VM_" + e.PropertyName);
                  };
-         //   this.model.listenFolders();
+            this.model.listenFolders();
         }
 
         public void update(object obj)

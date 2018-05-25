@@ -166,16 +166,8 @@ namespace ImageServiceGUI.Model
                     temp = new ObservableCollection<string>();
                     try
                     {
-                        using (StreamWriter outputFile = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
-                        {
-                            foreach (string item in this.lbHandlers)
-                            {
-                                outputFile.WriteLine(item);
-                            }
-                        }
                         TcpClient client2 = new TcpClient();
-                        client2.Connect(ep);
-                        
+                        client2.Connect(ep);   
                         stream = client2.GetStream();
                         reader = new BinaryReader(stream);
                         writer = new BinaryWriter(stream);
@@ -191,16 +183,7 @@ namespace ImageServiceGUI.Model
                             temp.Add(item);
                         }
                         this.lbHandlers = temp;
-
-                        using (StreamWriter outputFile = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
-                        {
-                            foreach (string item in this.lbHandlers)
-                            {
-                                outputFile.WriteLine(item);
-                            }
-                        }
-
-                        this.PropertyChanged?.Invoke(this,new PropertyChangedEventArgs("VM_LbHandlers"));
+                        this.PropertyChanged?.Invoke(this,new PropertyChangedEventArgs("LbHandlers"));
                         client2.Close();
                     }
                     
