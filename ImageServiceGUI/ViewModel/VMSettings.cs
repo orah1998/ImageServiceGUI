@@ -26,12 +26,11 @@ namespace ImageServiceGUI.ViewModel
             
                 model = new SettingsModel();
                 this.model.GetSettingsFromService();
-                this.model.listenFolders();
                 model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
                  {
-                     Console.WriteLine(e.PropertyName);
                      NotifyPropertyChanged("VM_" + e.PropertyName);
                  };
+         //   this.model.listenFolders();
         }
 
         public void update(object obj)
@@ -94,10 +93,6 @@ namespace ImageServiceGUI.ViewModel
         public void NotifyPropertyChanged(string property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-            //making the button pressable
-            //var command = this.Remove as RemoveCommand<object>;
-//            command.RaiseCanExecuteChange();
-
         }
 
 

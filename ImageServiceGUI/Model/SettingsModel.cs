@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -28,7 +29,7 @@ namespace ImageServiceGUI.Model
         private string source;
         private string log;
         private int thumbSize;
-        private ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
+        public ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
         public event PropertyChangedEventHandler PropertyChanged;
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
         static TcpClient client = new TcpClient();
@@ -36,10 +37,13 @@ namespace ImageServiceGUI.Model
         BinaryReader reader;
         BinaryWriter writer;
 
+        private static Mutex mutex;
+
 
 
         public SettingsModel()
         {
+            mutex = new Mutex();
         }
 
 
@@ -55,7 +59,7 @@ namespace ImageServiceGUI.Model
             obj["etc"] = name;
 
             writer.Write(JsonConvert.SerializeObject(obj));
-            client.Close();
+            client2.Close();
         }
 
 
@@ -66,6 +70,7 @@ namespace ImageServiceGUI.Model
         {
             get
             { 
+
                 return this.lbHandlers;
             }
         }
@@ -117,8 +122,6 @@ namespace ImageServiceGUI.Model
 
         public void GetSettingsFromService()
         {
-
-
             ObservableCollection<string> temp = new ObservableCollection<string>();
             client.Connect(ep);
             stream = client.GetStream();
@@ -142,13 +145,11 @@ namespace ImageServiceGUI.Model
                     this.log = obj["LogName"].ToString();
                     toBreak = obj["Handler"].ToString();
 
-
                 foreach (string item in toBreak.Split(';'))
                 {
                     temp.Add(item);
                 }
             this.lbHandlers = temp;
-
             client.Close();
 
 
@@ -156,19 +157,55 @@ namespace ImageServiceGUI.Model
 
         public void listenFolders()
         {
+            ObservableCollection<string> temp = new ObservableCollection<string>();
             new Task(() =>
             {
-                System.Threading.Thread.Sleep(500);
                 while (true)
                 {
+                    System.Threading.Thread.Sleep(2000);
+                    temp = new ObservableCollection<string>();
                     try
                     {
-                        GetSettingsFromService();
+                        using (StreamWriter outputFile = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
+                        {
+                            foreach (string item in this.lbHandlers)
+                            {
+                                outputFile.WriteLine(item);
+                            }
+                        }
+                        TcpClient client2 = new TcpClient();
+                        client2.Connect(ep);
+                        
+                        stream = client2.GetStream();
+                        reader = new BinaryReader(stream);
+                        writer = new BinaryWriter(stream);
+                        JObject obj2 = new JObject();
+                        obj2["inst"] = "6";
+                        obj2["etc"] = "1";
+                        writer.Write(JsonConvert.SerializeObject(obj2));
+                        string ret=reader.ReadString();
+                        JObject objRet= JsonConvert.DeserializeObject<JObject>(ret);
+                        string toBreak=objRet["Handler"].ToString();
+                         foreach (string item in toBreak.Split(';'))
+                        {
+                            temp.Add(item);
+                        }
+                        this.lbHandlers = temp;
+
+                        using (StreamWriter outputFile = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
+                        {
+                            foreach (string item in this.lbHandlers)
+                            {
+                                outputFile.WriteLine(item);
+                            }
+                        }
+
+                        this.PropertyChanged?.Invoke(this,new PropertyChangedEventArgs("VM_LbHandlers"));
+                        client2.Close();
                     }
                     
                     catch (Exception ex)
                     {
-
                     }
                 }
             }).Start();
