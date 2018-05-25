@@ -18,7 +18,7 @@
                 <DataGridTextColumn Header="Type" IsReadOnly="True" Width="Auto"  Binding="{Binding LogType}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
-                            <Setter Property="Background" Value="{Binding LogType}"/>
+                            <Setter Property="Background" Value="{Binding LogType, Converter={StaticResource statusColor}}"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
