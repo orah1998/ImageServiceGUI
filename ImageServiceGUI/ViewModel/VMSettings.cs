@@ -15,7 +15,6 @@ namespace ImageServiceGUI.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
         ISettingsModel model;
-        private ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
         private string selectedItem;
 
         //we will use remove as a delegate to remove handlers!
@@ -30,7 +29,7 @@ namespace ImageServiceGUI.ViewModel
                  {
                      NotifyPropertyChanged("VM_" + e.PropertyName);
                  };
-           // this.model.listenFolders();
+            this.model.listenFolders();
         }
 
         public void update(object obj)

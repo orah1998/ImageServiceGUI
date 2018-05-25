@@ -21,10 +21,12 @@ namespace ImageServiceGUI.controls
     /// </summary>
     public partial class log : UserControl
     {
+        private IVMlog vmlog;
         public log()
         {
             InitializeComponent();
-            this.DataContext = new VMlog();
+            vmlog= new VMlog();
+            this.DataContext = vmlog;
 
         }
     }

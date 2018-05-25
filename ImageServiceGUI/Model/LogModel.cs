@@ -17,7 +17,7 @@ namespace ImageServiceGUI.Model
     class LogModel : ILogModel
     {
         private static Mutex mutex;
-        private ObservableCollection<LogData> logsList = new ObservableCollection<LogData>();
+        public ObservableCollection<LogData> logsList = new ObservableCollection<LogData>();
         private string logType;
         private string messageType;
         BinaryReader reader;
@@ -35,6 +35,8 @@ namespace ImageServiceGUI.Model
 
 
 
+        
+
 
         public ObservableCollection<LogData> LogsList
         {
@@ -42,13 +44,9 @@ namespace ImageServiceGUI.Model
             set
             {
                 this.logsList = value;
+                this.NotifyPropertyChanged("LogsList");
             }
         }
-
-
-
-
-
 
 
 
@@ -112,20 +110,17 @@ namespace ImageServiceGUI.Model
 
         public void GetLogFromService()
         {
-        ObservableCollection<LogData> temp = new ObservableCollection<LogData>();
-
-        new Task(() =>
+            ObservableCollection<LogData> temp = new ObservableCollection<LogData>(); ;
+            new Task(() =>
             {
                 while (true)
                 {
-                    using (StreamWriter sw = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
-                    {
-                        sw.WriteLine("entered log");
-                    }
-                    System.Threading.Thread.Sleep(2500);
+
                     temp = new ObservableCollection<LogData>();
                     try
                     {
+                        System.Threading.Thread.Sleep(1500);
+                        
                         mutex.WaitOne();
                         SingletonClient.Instance.Connect();
                         stream = SingletonClient.Instance.getClient().GetStream();
@@ -142,30 +137,38 @@ namespace ImageServiceGUI.Model
 
                         foreach (string item in toBreak.Split('|'))
                         {
+
                             ENUMS.MessageTypeEnum typ;
                             if (item.Split(';')[0] == "INFO" || item.Split(';')[0] == "Information")
                             {
                                 typ = ENUMS.MessageTypeEnum.INFO;
                                 LogData logdata = new LogData(typ, item.Split(';')[1]);
-                                this.logsList.Add(logdata);
+                                temp.Add(logdata);
                             }
 
                             if (item.Split(';')[0] == "WARNING")
                             {
                                 typ = ENUMS.MessageTypeEnum.WARNING;
                                 LogData logdata = new LogData(typ, item.Split(';')[1]);
-                                this.logsList.Add(logdata);
+                                temp.Add(logdata);
                             }
 
                             if (item.Split(';')[0] == "FAIL")
                             {
                                 typ = ENUMS.MessageTypeEnum.FAIL;
                                 LogData logdata = new LogData(typ, item.Split(';')[1]);
-                                this.logsList.Add(logdata);
+                                temp.Add(logdata);
+                            }
+
+                            using (StreamWriter sw = File.AppendText(@"C: \Users\Operu\Desktop\testing\info.txt"))
+                            {
+                                sw.WriteLine(item);
                             }
                         }
                         this.logsList = temp;
                         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogsList"));
+                        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogType"));
+                        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogMessage"));
                         SingletonClient.Instance.Closing();
                         mutex.ReleaseMutex();
                     }

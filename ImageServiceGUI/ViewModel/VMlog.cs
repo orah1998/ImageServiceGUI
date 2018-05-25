@@ -30,11 +30,11 @@ namespace ImageServiceGUI.ViewModel
         public VMlog()
         {
             model = new LogModel();
-            model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            this.model.GetLogHistoryFromService();
+            this.model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
               {
                   NotifyPropertyChanged("VM_" + e.PropertyName);
               };
-            this.model.GetLogHistoryFromService();
             this.model.GetLogFromService();
 
         }
@@ -46,7 +46,6 @@ namespace ImageServiceGUI.ViewModel
             get { return this.model.LogsList; }
         }
 
-        
 
 
 
@@ -56,7 +55,6 @@ namespace ImageServiceGUI.ViewModel
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
 
 
     }

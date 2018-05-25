@@ -169,10 +169,6 @@ namespace ImageServiceGUI.Model
                 while (true)
                 {
                     System.Threading.Thread.Sleep(2000);
-                    using (StreamWriter sw = File.AppendText(@"C:\Users\Operu\Desktop\testing\info.txt"))
-                    {
-                        sw.WriteLine("entered settings");
-                    }
                     temp = new ObservableCollection<string>();
                     try
                     {
