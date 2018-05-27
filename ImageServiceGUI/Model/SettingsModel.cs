@@ -140,7 +140,15 @@ namespace ImageServiceGUI.Model
         {
             ObservableCollection<string> temp = new ObservableCollection<string>();
             mutex.WaitOne();
-            SingletonClient.Instance.Connect();
+            try
+            {
+                SingletonClient.Instance.Connect();
+                this.connection = true;
+            }
+            catch
+            {
+                this.connection = false;
+            }
             stream = SingletonClient.Instance.getClient().GetStream();
 
             reader = new BinaryReader(stream);
@@ -187,11 +195,11 @@ namespace ImageServiceGUI.Model
                         mutex.WaitOne();
                         try { 
                             SingletonClient.Instance.Connect();
-                            t
+                            this.connection = true;
                         }
                         catch
                         {
-
+                            this.connection = false;
                         }
                         stream = SingletonClient.Instance.getClient().GetStream();
 
