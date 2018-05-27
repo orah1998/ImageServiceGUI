@@ -38,7 +38,19 @@ namespace ImageServiceGUI.Model
         BinaryWriter writer;
 
         private static Mutex mutex;
+        private bool connection;
 
+        public bool Connection
+        {
+            get
+            {
+                return this.connection;
+            }
+            set
+            {
+                this.connection = value;
+            }
+        }
 
 
         public SettingsModel()
@@ -173,7 +185,14 @@ namespace ImageServiceGUI.Model
                     try
                     {
                         mutex.WaitOne();
-                        SingletonClient.Instance.Connect();
+                        try { 
+                            SingletonClient.Instance.Connect();
+                            t
+                        }
+                        catch
+                        {
+
+                        }
                         stream = SingletonClient.Instance.getClient().GetStream();
 
                         reader = new BinaryReader(stream);

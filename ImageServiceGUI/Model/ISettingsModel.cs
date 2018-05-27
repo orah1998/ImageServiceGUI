@@ -17,6 +17,7 @@ namespace ImageServiceGUI.Model
         int ThumbSize { set; get; }
         void GetSettingsFromService();
         ObservableCollection<string> LbHandlers { get; }
+        bool connection { get; set; }
 
         void RemoveHandler(string selectedItem);
         void listenFolders();

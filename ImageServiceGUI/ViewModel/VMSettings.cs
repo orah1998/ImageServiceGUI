@@ -16,7 +16,7 @@ namespace ImageServiceGUI.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         ISettingsModel model;
         private string selectedItem;
-
+        private bool connection;
         //we will use remove as a delegate to remove handlers!
         public ICommand Remove { get; private set; }
 
@@ -48,6 +48,18 @@ namespace ImageServiceGUI.ViewModel
 
         }
 
+        public bool VM_Connection
+        {
+            get
+            {
+                return this.model.connection;
+            }
+            set
+            {
+                this.model.connection = value;
+                this.NotifyPropertyChanged("Connection");
+            }
+        }
 
         public string VM_OutputDirectory
         {
