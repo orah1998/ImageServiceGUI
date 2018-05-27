@@ -24,7 +24,13 @@ namespace ImageServiceGUI.ViewModel
         {
             
                 model = new SettingsModel();
+            try { 
                 this.model.GetSettingsFromService();
+            }
+            catch(Exception e)
+            {
+
+            }
                 model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
                  {
                      NotifyPropertyChanged("VM_" + e.PropertyName);

@@ -130,7 +130,7 @@ namespace ImageServiceGUI.Model
             set
             {
                 this.thumbSize = value;
-                this.NotifyPropertyChanged("source");
+                this.NotifyPropertyChanged("ThumbnailSize");
             }
             get { return this.thumbSize; }
         }
@@ -142,13 +142,8 @@ namespace ImageServiceGUI.Model
             mutex.WaitOne();
             try
             {
-                SingletonClient.Instance.Connect();
                 this.connection = true;
-            }
-            catch
-            {
-                this.connection = false;
-            }
+                SingletonClient.Instance.Connect();
             stream = SingletonClient.Instance.getClient().GetStream();
 
             reader = new BinaryReader(stream);
@@ -179,6 +174,14 @@ namespace ImageServiceGUI.Model
             SingletonClient.Instance.Closing();
             mutex.ReleaseMutex();
 
+
+            }
+            catch (Exception e)
+            {
+                this.connection = false;
+            }
+
+
         }
 
         public void listenFolders()
@@ -193,14 +196,10 @@ namespace ImageServiceGUI.Model
                     try
                     {
                         mutex.WaitOne();
-                        try { 
+                        
                             SingletonClient.Instance.Connect();
                             this.connection = true;
-                        }
-                        catch
-                        {
-                            this.connection = false;
-                        }
+                        
                         stream = SingletonClient.Instance.getClient().GetStream();
 
                         reader = new BinaryReader(stream);
@@ -226,6 +225,7 @@ namespace ImageServiceGUI.Model
                     
                     catch (Exception ex)
                     {
+                        this.connection = false;
                     }
                 }
             }).Start();
