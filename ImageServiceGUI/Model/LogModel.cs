@@ -101,12 +101,7 @@ namespace ImageServiceGUI.Model
 
         }
 
-
-
-
-
-
-
+        
 
         public void GetLogFromService()
         {
@@ -115,12 +110,10 @@ namespace ImageServiceGUI.Model
             {
                 while (true)
                 {
-
+                    System.Threading.Thread.Sleep(1500);
                     temp = new ObservableCollection<LogData>();
                     try
-                    {
-                        System.Threading.Thread.Sleep(1500);
-                        
+                    { 
                         mutex.WaitOne();
                         SingletonClient.Instance.Connect();
                         stream = SingletonClient.Instance.getClient().GetStream();
@@ -160,15 +153,9 @@ namespace ImageServiceGUI.Model
                                 temp.Add(logdata);
                             }
 
-                            using (StreamWriter sw = File.AppendText(@"C: \Users\Operu\Desktop\testing\info.txt"))
-                            {
-                                sw.WriteLine(item);
-                            }
+                            
                         }
-                        this.logsList = temp;
-                        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogsList"));
-                        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogType"));
-                        this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LogMessage"));
+                        this.LogsList = temp;
                         SingletonClient.Instance.Closing();
                         mutex.ReleaseMutex();
                     }

@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="0">In Logs Page</Label>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding VM_LogsList}" AutoGenerateColumns="False" CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="Auto" Height="Auto" Margin="0,0,0,10">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding VM_LogsList,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" AutoGenerateColumns="False" CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="Auto" Height="Auto" Margin="0,0,0,10">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" IsReadOnly="True" Width="Auto"  Binding="{Binding LogType}">

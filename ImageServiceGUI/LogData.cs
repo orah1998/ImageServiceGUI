@@ -9,13 +9,46 @@ namespace ImageServiceGUI
 {
     class LogData
     {
-        public string LogMessage { get; set; }
-        public MessageTypeEnum LogType { get; set; }
+        private string logMessage;
+        private MessageTypeEnum logType;
+
+
         /// <param name="message"></param>
         public LogData(MessageTypeEnum type, string message)
         {
             this.LogMessage = message;
             this.LogType = type;
         }
+
+
+        public string LogMessage
+        {
+            get
+            {
+                return this.logMessage;
+            }
+            set
+            {
+                this.logMessage = value;
+            }
+        }
+
+        public MessageTypeEnum LogType
+        {
+            get
+            {
+                return this.logType;
+            }
+            set
+            {
+                this.logType = value;
+            }
+        }
+
+
+
+
+
+
     }
 }

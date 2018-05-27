@@ -21,34 +21,34 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="38"/>
+            <RowDefinition Height="Auto" MinHeight="84"/>
+            <RowDefinition Height="Auto" MinHeight="40.8"/>
             <RowDefinition Height="Auto" MinHeight="36"/>
             <RowDefinition Height="Auto" MinHeight="39"/>
             <RowDefinition Height="Auto" MinHeight="47"/>
             <RowDefinition Height="Auto" MinHeight="203"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" MinWidth="422.4" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Style="{StaticResource propertieTitle}" Margin="303,0,0,0" Width="235"  >Settings</TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1"></TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" Foreground="Blue" FontSize="60" Style="{StaticResource propertieTitle}" Margin="257,0,243,38.8" Width="300" Grid.ColumnSpan="2" Grid.RowSpan="2"  Text=" Settings"  />
+        <TextBlock Grid.Row="0" Grid.Column="1" Margin="1.6,0,0,38.8" Grid.RowSpan="2"></TextBlock>
 
-        <TextBlock Grid.Row="1" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,3,5,2">Output Directory:</TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="25" Text="{Binding VM_OutputDirectory}"  Margin="3"/>
+        <TextBlock Grid.Row="1" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,4,7.4,1.8">Output Directory:</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="25" Text="{Binding VM_OutputDirectory}"  Margin="2.6,4,3,2.8"/>
 
-        <TextBlock Grid.Row="2" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,0,5,14" Grid.RowSpan="3">Source Name:</TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="25"  Text="{Binding VM_SourceName}"  Margin="3,1,3,10" Grid.RowSpan="2"/>
+        <TextBlock Grid.Row="2" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,0.2,7.4,14" Grid.RowSpan="3">Source Name:</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="25"  Text="{Binding VM_SourceName}"  Margin="2.6,1.2,3,10" Grid.RowSpan="2"/>
 
-        <TextBlock Grid.Row="3" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,3,259,14" Grid.ColumnSpan="2" Grid.RowSpan="2">Log Name:</TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="25" Text="{Binding VM_LogName}"  Margin="3"/>
+        <TextBlock Grid.Row="3" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,3.2,259,14" Grid.ColumnSpan="2" Grid.RowSpan="2">Log Name:</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="25" Text="{Binding VM_LogName}"  Margin="2.6,3.2,3,3"/>
 
-        <TextBlock Grid.Row="4" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,0,5,14">Thumbnail Size:</TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="25" Text="{Binding VM_ThumbnailSize}"  Margin="3"/>
+        <TextBlock Grid.Row="4" FontSize="20" Foreground="Black" Style="{StaticResource propertieTitle}" Margin="0,0,7.4,14">Thumbnail Size:</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="25" Text="{Binding VM_ThumbnailSize}"  Margin="2.6,3,3,3"/>
 
-        <Button Name="removeButton" Margin="0,44,0,154" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Click="Button_Click" IsEnabled="False">remove</Button>
+        <Button Name="removeButton" Margin="0,44,0,165" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Click="Button_Click" IsEnabled="False">remove</Button>
         <ListBox Name="lbHandlers" Grid.ColumnSpan="2" Grid.Row="5" ItemsSource="{Binding VM_LbHandlers}" SelectedItem="{Binding SelectedItem}" SelectionChanged="lbHandlers_SelectionChanged" Margin="0,54,0,0" ></ListBox>
 
     </Grid>

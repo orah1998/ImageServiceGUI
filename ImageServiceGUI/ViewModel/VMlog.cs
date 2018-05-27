@@ -15,17 +15,11 @@ namespace ImageServiceGUI.ViewModel
 {
     class VMlog : IVMlog
     {
-
-        static TcpClient client = new TcpClient();
-
         private LogData selectedItem;
         private LogModel model;
         private int flag = 1;
-
         public event PropertyChangedEventHandler PropertyChanged;
-
         private ObservableCollection<LogData> VM_logsList = new ObservableCollection<LogData>();
-
 
         public VMlog()
         {
@@ -33,13 +27,19 @@ namespace ImageServiceGUI.ViewModel
             this.model.GetLogHistoryFromService();
             this.model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
               {
+                  using (StreamWriter sw = File.AppendText(@"C: \Users\Operu\Desktop\testing\info.txt"))
+                  {
+                      sw.WriteLine(e.PropertyName);
+                  }
                   NotifyPropertyChanged("VM_" + e.PropertyName);
               };
             this.model.GetLogFromService();
 
         }
 
+
         
+
 
         public ObservableCollection<LogData> VM_LogsList
         {
