@@ -52,11 +52,11 @@ namespace ImageServiceGUI.ViewModel
         {
             get
             {
-                return this.model.connection;
+                return this.model.Connection;
             }
             set
             {
-                this.model.connection = value;
+                this.model.Connection = value;
                 this.NotifyPropertyChanged("Connection");
             }
         }
