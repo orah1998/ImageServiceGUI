@@ -196,7 +196,7 @@ namespace ImageServiceGUI.Model
                     System.Threading.Thread.Sleep(2000);
                     temp = new ObservableCollection<string>();
                     try
-                    {
+                        {
                         mutex.WaitOne();
                         
                             SingletonClient.Instance.Connect();
