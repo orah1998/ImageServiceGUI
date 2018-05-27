@@ -31,13 +31,16 @@ public class SingletonClient
 
     public void Connect()
     {
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+        try
+        {
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
         client = new TcpClient();
-        try { 
+
         client.Connect(ep);
+
         }catch(Exception e)
         {
-            throw new Exception();
+            
         }
     }
 

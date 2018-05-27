@@ -31,8 +31,6 @@ namespace ImageServiceGUI.Model
         private int thumbSize;
         public ObservableCollection<string> lbHandlers = new ObservableCollection<string>();
         public event PropertyChangedEventHandler PropertyChanged;
-        IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
-        static TcpClient client = new TcpClient();
         static NetworkStream stream;
         BinaryReader reader;
         BinaryWriter writer;
