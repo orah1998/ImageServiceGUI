@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI
 {
+    /// <summary>
+    /// data oooof typpppee and meessagee
+    /// </summary>
     class LogData
     {
         private string logMessage;
@@ -20,7 +23,9 @@ namespace ImageServiceGUI
             this.LogType = type;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string LogMessage
         {
             get
@@ -32,7 +37,9 @@ namespace ImageServiceGUI
                 this.logMessage = value;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public MessageTypeEnum LogType
         {
             get
@@ -44,11 +51,5 @@ namespace ImageServiceGUI
                 this.logType = value;
             }
         }
-
-
-
-
-
-
     }
 }

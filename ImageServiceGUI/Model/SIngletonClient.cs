@@ -8,13 +8,18 @@ public class SingletonClient
 
     private TcpClient client;
 
+    /// <summary>
+    /// singeltoon cliieeent
+    /// </summary>
     public SingletonClient()
 
     {
         
     }
 
-
+    /// <summary>
+    /// iinstacne
+    /// </summary>
     public static SingletonClient Instance
     {
         get
@@ -28,7 +33,9 @@ public class SingletonClient
 
         }
     }
-
+    /// <summary>
+    /// connect new
+    /// </summary>
     public void Connect()
     {
         try
@@ -44,12 +51,17 @@ public class SingletonClient
         }
     }
 
-
+    /// <summary>
+    /// get
+    /// </summary>
+    /// <returns></returns>
     public TcpClient getClient()
     {
         return this.client;
     }
-
+    /// <summary>
+    /// cloose
+    /// </summary>
     public void Closing()
     {
         client.Close();

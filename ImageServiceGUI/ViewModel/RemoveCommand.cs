@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
-
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class RemoveCommand<T> : ICommand
 {
     public delegate void ExecuteMethod<T>(object obj);

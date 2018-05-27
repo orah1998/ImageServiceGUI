@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace ImageServiceGUI.ViewModel
 {
+    /// <summary>
+    /// view model settings
+    /// </summary>
     class VMSettings : IVMSettings
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -19,7 +22,9 @@ namespace ImageServiceGUI.ViewModel
         private bool connection;
         //we will use remove as a delegate to remove handlers!
         public ICommand Remove { get; private set; }
-
+        /// <summary>
+        /// coonstruuctor
+        /// </summary>
         public VMSettings()
         {
             
@@ -37,7 +42,10 @@ namespace ImageServiceGUI.ViewModel
                  };
             this.model.listenFolders();
         }
-
+        /// <summary>
+        /// update
+        /// </summary>
+        /// <param name="obj"></param>
         public void update(object obj)
         {
             // send to server remove from handlers
@@ -53,7 +61,9 @@ namespace ImageServiceGUI.ViewModel
 
 
         }
-
+        /// <summary>
+        /// color background
+        /// </summary>
         public bool VM_Connection
         {
             get
@@ -65,7 +75,9 @@ namespace ImageServiceGUI.ViewModel
                 this.model.Connection = value;
             }
         }
-
+        /// <summary>
+        /// dir uuooutput
+        /// </summary>
         public string VM_OutputDirectory
         {
             get { return this.model.OutputDir; }
@@ -75,17 +87,23 @@ namespace ImageServiceGUI.ViewModel
         {
             get { return this.model.Source; }
         }
-
+        /// <summary>
+        /// log namee
+        /// </summary>
         public string VM_LogName
         {
             get { return this.model.Log; }
         }
-
+        /// <summary>
+        /// siize
+        /// </summary>
         public int VM_ThumbnailSize
         {
             get { return this.model.ThumbSize; }
         }
-
+        /// <summary>
+        /// list
+        /// </summary>
         public ObservableCollection<string> VM_LbHandlers
         {
             get { return this.model.LbHandlers; }
@@ -103,15 +121,19 @@ namespace ImageServiceGUI.ViewModel
             get { return this.selectedItem; }
         }
          
-
-        
-
+        /// <summary>
+        /// uupdatee
+        /// </summary>
+        /// <param name="property"></param>
         public void NotifyPropertyChanged(string property)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-
-
+        /// <summary>
+        /// noothing
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
         private bool CanExecuteRemove(object parameter)
         {
             if (this.SelectedItem != null)

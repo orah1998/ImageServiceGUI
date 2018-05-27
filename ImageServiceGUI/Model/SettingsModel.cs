@@ -37,7 +37,9 @@ namespace ImageServiceGUI.Model
 
         private static Mutex mutex;
         private bool connection;
-
+        /// <summary>
+        /// conneection
+        /// </summary>
         public bool Connection
         {
             get
@@ -52,13 +54,18 @@ namespace ImageServiceGUI.Model
             }
         }
 
-
+        /// <summary>
+        /// coonstrrructor
+        /// </summary>
         public SettingsModel()
         {
             mutex = new Mutex();
         }
 
-
+        /// <summary>
+        /// rremooovee foldeerrr
+        /// </summary>
+        /// <param name="name"></param>
         public void RemoveHandler(string name)
         {
             mutex.WaitOne();
@@ -81,7 +88,9 @@ namespace ImageServiceGUI.Model
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public ObservableCollection<string> LbHandlers
         {
             get
@@ -91,7 +100,9 @@ namespace ImageServiceGUI.Model
             }
         }
 
-
+        /// <summary>
+        /// outputdir
+        /// </summary>
         public string OutputDir
         {
             set
@@ -102,7 +113,9 @@ namespace ImageServiceGUI.Model
             get { return this.outputDir; }
         }
 
-
+        /// <summary>
+        /// source
+        /// </summary>
         public string Source
         {
             set
@@ -113,7 +126,9 @@ namespace ImageServiceGUI.Model
             get { return this.source; }
         }
 
-
+        /// <summary>
+        /// log
+        /// </summary>
         public string Log
         {
             set
@@ -124,7 +139,9 @@ namespace ImageServiceGUI.Model
             get { return this.log; }
         }
 
-
+        /// <summary>
+        /// size
+        /// </summary>
         public int ThumbSize
         {
             set
@@ -135,7 +152,9 @@ namespace ImageServiceGUI.Model
             get { return this.thumbSize; }
         }
 
-
+        /// <summary>
+        /// seettiings
+        /// </summary>
         public void GetSettingsFromService()
         {
             ObservableCollection<string> temp = new ObservableCollection<string>();
@@ -183,7 +202,9 @@ namespace ImageServiceGUI.Model
 
 
         }
-
+        /// <summary>
+        /// listeening all timee
+        /// </summary>
         public void listenFolders()
         {
             ObservableCollection<string> temp = new ObservableCollection<string>();
@@ -232,7 +253,10 @@ namespace ImageServiceGUI.Model
 
         }
 
-
+        /// <summary>
+        /// uppdAte
+        /// </summary>
+        /// <param name="prop"></param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(prop));

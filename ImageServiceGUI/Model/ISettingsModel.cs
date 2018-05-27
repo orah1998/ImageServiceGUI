@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     interface ISettingsModel : INotifyPropertyChanged
     {
 

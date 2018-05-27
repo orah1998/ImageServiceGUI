@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class ILogModel
     {
 
