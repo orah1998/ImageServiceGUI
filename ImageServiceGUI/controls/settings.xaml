@@ -15,7 +15,7 @@
                         <Setter Property="Background"
                                 Value="White" />
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding connection}" 
+                    <DataTrigger Binding="{Binding VM_connection}" 
                                  Value="False">
                         <Setter Property="Background"
                                 Value="Gray" />
