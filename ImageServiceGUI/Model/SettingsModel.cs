@@ -49,6 +49,8 @@ namespace ImageServiceGUI.Model
             set
             {
                 this.connection = value;
+                this.NotifyPropertyChanged("Connection");
+
             }
         }
 

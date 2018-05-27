@@ -63,7 +63,6 @@ namespace ImageServiceGUI.ViewModel
             set
             {
                 this.model.Connection = value;
-                this.NotifyPropertyChanged("Connection");
             }
         }
 

@@ -52,52 +52,58 @@ namespace ImageServiceGUI.Model
 
         public void GetLogHistoryFromService()
         {
-            mutex.WaitOne();
-            SingletonClient.Instance.Connect();
-            stream = SingletonClient.Instance.getClient().GetStream();
-            reader = new BinaryReader(stream);
-            writer = new BinaryWriter(stream);
-
-
-            // ask the server for old log            
-            JObject obj = new JObject();
-            obj["inst"] = "2";
-            string command = JsonConvert.SerializeObject(obj);
-            writer.Write(command);
-
-            // getting old log
-            string ans = reader.ReadString();
-            JObject obj2 = JsonConvert.DeserializeObject<JObject>(ans);
-            string temp = obj2["2"].ToString();
-
-            foreach (string item in temp.Split('|'))
+            try
             {
-                ENUMS.MessageTypeEnum typ;
-                if (item.Split(';')[0]=="INFO" || item.Split(';')[0] == "Information")
+                mutex.WaitOne();
+                SingletonClient.Instance.Connect();
+                stream = SingletonClient.Instance.getClient().GetStream();
+                reader = new BinaryReader(stream);
+                writer = new BinaryWriter(stream);
+
+
+                // ask the server for old log            
+                JObject obj = new JObject();
+                obj["inst"] = "2";
+                string command = JsonConvert.SerializeObject(obj);
+                writer.Write(command);
+
+                // getting old log
+                string ans = reader.ReadString();
+                JObject obj2 = JsonConvert.DeserializeObject<JObject>(ans);
+                string temp = obj2["2"].ToString();
+
+                foreach (string item in temp.Split('|'))
                 {
-                    typ = ENUMS.MessageTypeEnum.INFO;
-                    LogData logdata = new LogData(typ, item.Split(';')[1]);
-                    this.logsList.Add(logdata);
+                    ENUMS.MessageTypeEnum typ;
+                    if (item.Split(';')[0] == "INFO" || item.Split(';')[0] == "Information")
+                    {
+                        typ = ENUMS.MessageTypeEnum.INFO;
+                        LogData logdata = new LogData(typ, item.Split(';')[1]);
+                        this.logsList.Add(logdata);
+                    }
+
+                    if (item.Split(';')[0] == "WARNING")
+                    {
+                        typ = ENUMS.MessageTypeEnum.WARNING;
+                        LogData logdata = new LogData(typ, item.Split(';')[1]);
+                        this.logsList.Add(logdata);
+                    }
+
+                    if (item.Split(';')[0] == "FAIL")
+                    {
+                        typ = ENUMS.MessageTypeEnum.FAIL;
+                        LogData logdata = new LogData(typ, item.Split(';')[1]);
+                        this.logsList.Add(logdata);
+                    }
                 }
 
-                if (item.Split(';')[0] == "WARNING")
-                {
-                    typ = ENUMS.MessageTypeEnum.WARNING;
-                    LogData logdata = new LogData(typ, item.Split(';')[1]);
-                    this.logsList.Add(logdata);
-                }
 
-                if (item.Split(';')[0] == "FAIL")
-                {
-                    typ = ENUMS.MessageTypeEnum.FAIL;
-                    LogData logdata = new LogData(typ, item.Split(';')[1]);
-                    this.logsList.Add(logdata);
-                }
+                SingletonClient.Instance.Closing();
+                mutex.ReleaseMutex();
+            }catch(Exception e)
+            {
+
             }
-
-
-            SingletonClient.Instance.Closing();
-            mutex.ReleaseMutex();
 
         }
 
