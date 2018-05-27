@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImageServiceGUI"
+             xmlns:convertors ="clr-namespace:ImageServiceGUI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,12 +14,14 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0">In Logs Page</Label>
         <DataGrid Grid.Row="1" ItemsSource="{Binding VM_LogsList,UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" AutoGenerateColumns="False" CanUserAddRows="False"  VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="Auto" Height="Auto" Margin="0,0,0,10">
-
+            <DataGrid.Resources>
+                <convertors:statusColor x:Key="statusColor"/>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Type" IsReadOnly="True" Width="Auto"  Binding="{Binding LogType}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
-                            <Setter Property="Background" Value="{Binding LogType}"/>
+                            <Setter Property="Background" Value="{Binding LogType, Converter = {StaticResource statusColor}}"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
