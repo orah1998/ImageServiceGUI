@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace ImageServiceGUI.ViewModel
-{
+{   
+    /// <summary>
+    /// vm settngs
+    /// </summary>
     interface IVMSettings : INotifyPropertyChanged
     {
         string VM_OutputDirectory { get; }

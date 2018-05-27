@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.Model
 {
+    /// <summary>
+    /// moodel oof loog
+    /// </summary>
     class LogModel : ILogModel
     {
         private static Mutex mutex;
@@ -26,18 +29,17 @@ namespace ImageServiceGUI.Model
         static TcpClient client = new TcpClient();
         static NetworkStream stream;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// cooonstctr
+        /// </summary>
         public LogModel()
         {
             mutex = new Mutex();
         }
 
-
-
-
-        
-
-
+        /// <summary>
+        /// list
+        /// </summary>
         public ObservableCollection<LogData> LogsList
         {
             get { return this.logsList; }
@@ -47,9 +49,9 @@ namespace ImageServiceGUI.Model
                 this.NotifyPropertyChanged("LogsList");
             }
         }
-
-
-
+        /// <summary>
+        /// old log
+        /// </summary>
         public void GetLogHistoryFromService()
         {
             try
@@ -108,7 +110,9 @@ namespace ImageServiceGUI.Model
         }
 
         
-
+        /// <summary>
+        /// get neew loog
+        /// </summary>
         public void GetLogFromService()
         {
             ObservableCollection<LogData> temp = new ObservableCollection<LogData>(); ;
@@ -174,7 +178,10 @@ namespace ImageServiceGUI.Model
         }
 
 
-
+        /// <summary>
+        /// updater
+        /// </summary>
+        /// <param name="prop"></param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

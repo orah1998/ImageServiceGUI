@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace ImageServiceGUI.ViewModel
 {
+    /// <summary>
+    /// view model of log
+    /// </summary>
     class VMlog : IVMlog
     {
         private LogData selectedItem;
@@ -20,7 +23,9 @@ namespace ImageServiceGUI.ViewModel
         private int flag = 1;
         public event PropertyChangedEventHandler PropertyChanged;
         private ObservableCollection<LogData> VM_logsList = new ObservableCollection<LogData>();
-
+        /// <summary>
+        /// cnstrctr
+        /// </summary>
         public VMlog()
         {
             model = new LogModel();
@@ -36,21 +41,17 @@ namespace ImageServiceGUI.ViewModel
             this.model.GetLogFromService();
 
         }
-
-
-        
-
-
+        /// <summary>
+        /// view model list
+        /// </summary>
         public ObservableCollection<LogData> VM_LogsList
         {
             get { return this.model.LogsList; }
         }
-
-
-
-
-
-
+        /// <summary>
+        /// updater 
+        /// </summary>
+        /// <param name="prop"></param>
         public void NotifyPropertyChanged(string prop)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

@@ -8,13 +8,18 @@ public class SingletonClient
 
     private TcpClient client;
 
+    /// <summary>
+    /// singeltoon cliieeent
+    /// </summary>
     public SingletonClient()
 
     {
         
     }
 
-
+    /// <summary>
+    /// iinstacne
+    /// </summary>
     public static SingletonClient Instance
     {
         get
@@ -28,7 +33,9 @@ public class SingletonClient
 
         }
     }
-
+    /// <summary>
+    /// connect new
+    /// </summary>
     public void Connect()
     {
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
@@ -41,12 +48,17 @@ public class SingletonClient
         }
     }
 
-
+    /// <summary>
+    /// get
+    /// </summary>
+    /// <returns></returns>
     public TcpClient getClient()
     {
         return this.client;
     }
-
+    /// <summary>
+    /// cloose
+    /// </summary>
     public void Closing()
     {
         client.Close();
